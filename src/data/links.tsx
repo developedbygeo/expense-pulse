@@ -28,35 +28,39 @@ enum NavigationEnum {
     PROFILE = '/profile',
 }
 
-export const NAVIGATION_LINKS = [
-    {
-        label: 'Home',
-        icon: MdHome,
-        href: NavigationEnum.HOME,
-    },
-    {
-        label: 'My Expenses',
-        icon: MdPayments,
-        href: NavigationEnum.MY_EXPENSES,
-    },
-    {
-        label: 'Analysis',
-        icon: MdAnalytics,
-        href: NavigationEnum.ANALYSIS,
-    },
-    {
-        label: 'Reports',
-        icon: MdAssignment,
-        href: NavigationEnum.REPORTS,
-    },
-    {
-        label: 'Settings',
-        icon: MdSettings,
-        href: NavigationEnum.SETTINGS,
-    },
-    {
-        label: 'Profile',
-        icon: MdPerson,
-        href: NavigationEnum.PROFILE,
-    },
-]
+export const NAVIGATION_LINKS = {
+    core: [
+        {
+            label: 'Home',
+            icon: MdHome,
+            href: NavigationEnum.HOME,
+        },
+        {
+            label: 'My Expenses',
+            icon: MdPayments,
+            href: NavigationEnum.MY_EXPENSES,
+        },
+        {
+            label: 'Analysis',
+            icon: MdAnalytics,
+            href: NavigationEnum.ANALYSIS,
+        },
+        {
+            label: 'Reports',
+            icon: MdAssignment,
+            href: NavigationEnum.REPORTS,
+        },
+    ],
+    misc: [
+        {
+            label: 'Settings',
+            icon: MdSettings,
+            href: NavigationEnum.SETTINGS,
+        },
+        {
+            label: 'Profile',
+            icon: MdPerson,
+            href: NavigationEnum.PROFILE,
+        },
+    ],
+}
