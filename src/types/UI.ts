@@ -1,31 +1,27 @@
 export type WithClassName = {
-  className?: string;
-};
-
-export type WithLocale = {
-  locale: string;
-};
+    className?: string
+}
 
 export type WithChildren = {
-  children?: React.ReactNode;
-};
+    children?: React.ReactNode
+}
 
 export type WithSource = {
-  src: string;
-};
+    src: string
+}
 
 export type WithDataIsDark = {
-  "data-is-dark"?: string;
-};
+    'data-is-dark'?: string
+}
 
 export type WithSearchParams = {
-  searchParams?: string | string[] | undefined;
-};
+    searchParams?: string | string[] | undefined
+}
 
 export type WithCategorySearchParams = {
-  searchParams?: {
-    category: string;
-  };
-};
+    searchParams?: {
+        category: string
+    }
+}
 
-export type AnimationDirection = "up" | "down" | "left" | "right" | "default";
+export type AnimationDirection = 'up' | 'down' | 'left' | 'right' | 'default'
