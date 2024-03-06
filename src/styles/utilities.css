@@ -1,11 +1,11 @@
 @tailwind utilities;
 
 @layer utilities {
-  .apply-mt {
-    @apply mt-24 sm:mt-32 lg:mt-40;
-  }
+    .apply-mt {
+        @apply mt-24 sm:mt-32 lg:mt-40;
+    }
 
-  .apply-my {
-    @apply my-24 sm:my-32 lg:my-40;
-  }
+    .apply-my {
+        @apply my-24 sm:my-32 lg:my-40;
+    }
 }
