@@ -1,15 +1,20 @@
 import { motion } from 'framer-motion'
-import { Fragment, useReducer } from 'react'
+import { Fragment, useEffect, useReducer } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { Separator } from '@/components/elements/Separator'
 import AnimatedBurgerButton from '@/components/modules/UI/AnimatedBurgerButton'
 import { NAVIGATION_LINKS } from '@/data/links'
+import { handleLayoutWithSidebar } from '@/lib/UI'
 import { cn } from '@/lib/utils'
 import { WithClassName } from '@/types/UI'
 
 const Sidebar = ({ className }: WithClassName) => {
     const [expanded, setExpanded] = useReducer((prev) => !prev, false)
+
+    useEffect(() => {
+        handleLayoutWithSidebar(expanded)
+    }, [expanded])
 
     return (
         <div
