@@ -25,3 +25,7 @@ export type WithCategorySearchParams = {
 }
 
 export type AnimationDirection = 'up' | 'down' | 'left' | 'right' | 'default'
+
+export type Prettify<T> = {
+    [K in keyof T]: T[K]
+} & object
