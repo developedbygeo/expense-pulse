@@ -1,20 +1,33 @@
 import { ComponentPropsWithoutRef, forwardRef, useId } from 'react'
 
-type InputProps = ComponentPropsWithoutRef<'input'> & { label: string }
+import InputError from '@/components/elements/InputError'
+import { cn } from '@/lib/utils'
+import { WithClassName } from '@/types/UI'
+
+type InputProps = ComponentPropsWithoutRef<'input'> &
+    WithClassName & { label: string; errorMessage?: string }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ label, ...props }, ref) => {
+    ({ className, label, errorMessage, ...props }, ref) => {
         const id = useId()
 
         return (
-            <div className="group relative z-0 transition-all focus-within:z-10">
+            <div
+                className={cn(
+                    'group relative z-0 transition-all focus-within:z-10',
+                    className
+                )}
+            >
                 <input
                     type="text"
                     id={id}
                     ref={ref}
                     {...props}
                     placeholder=" "
-                    className="peer block w-full border border-neutral-300 bg-transparent px-6 pb-4 pt-12 text-base/6 text-neutral-950 ring-4 ring-transparent transition focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5 group-first:rounded-t-2xl group-last:rounded-b-2xl"
+                    className={cn(
+                        'peer block w-full border border-neutral-300 bg-transparent px-6 pb-4 pt-12 text-base/6 text-neutral-950 ring-4 ring-transparent transition focus:border-neutral-950 focus:outline-none focus:ring-neutral-950/5 rounded-md',
+                        errorMessage ? 'border-red-700' : ''
+                    )}
                 />
                 <label
                     htmlFor={id}
@@ -22,6 +35,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 >
                     {label}
                 </label>
+                <InputError
+                    className="absolute -bottom-6 left-0"
+                    message={errorMessage}
+                />
             </div>
         )
     }
