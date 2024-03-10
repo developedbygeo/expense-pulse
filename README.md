@@ -1,6 +1,6 @@
 # Expense Pulse
 
-An RxDb-powered, Electron React fullstack expense tracker with a twist.
+An SQLite-powered, Electron React fullstack expense tracker with a twist.
 
 ## Coming soon
 
