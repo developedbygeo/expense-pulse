@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback } from '@/components/elements/Avatar'
+import UserActions from '@/components/modules/User/UserActions'
 import { cn } from '@/lib/utils'
 import { WithClassName } from '@/types/UI'
 
@@ -8,11 +9,7 @@ const Header = ({ className }: WithClassName) => {
             className={cn('py-4 bg-neutral-100 dark:bg-neutral-900', className)}
         >
             <div className="flex justify-end container">
-                <Avatar className="shadow-md">
-                    <AvatarFallback>
-                        <span className="text-lg">GA</span>
-                    </AvatarFallback>
-                </Avatar>
+                <UserActions />
             </div>
         </header>
     )
