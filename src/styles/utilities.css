@@ -5,6 +5,10 @@
         @apply mt-24 sm:mt-32 lg:mt-40;
     }
 
+    .apply-mb {
+        @apply mb-24 sm:mb-32 lg:mb-40;
+    }
+
     .apply-my {
         @apply my-24 sm:my-32 lg:my-40;
     }
