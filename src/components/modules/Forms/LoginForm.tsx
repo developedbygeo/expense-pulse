@@ -3,10 +3,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@/components/elements/Button'
 import Input from '@/components/elements/Input'
+import InputPassword from '@/components/elements/InputPassword'
 import { Separator } from '@/components/elements/Separator'
 import { cn } from '@/lib/utils'
 import { RegisterOrLoginFormProps } from '@/types/forms/props'
-import { LoginUser, LoginUserSchema } from '@/types/forms/userAuth'
+import { LoginUser, LoginUserSchema } from '@/types/forms/userAuthSchema'
 
 const LoginForm = ({ className, switchFormType }: RegisterOrLoginFormProps) => {
     const {
@@ -29,16 +30,14 @@ const LoginForm = ({ className, switchFormType }: RegisterOrLoginFormProps) => {
         >
             <fieldset className="grid gap-8 grid-cols-2 mt-12">
                 <Input
-                    onError={() => errors.Username?.message}
                     {...register('Username')}
                     type="text"
                     id="username"
                     label="Username"
                     errorMessage={errors.Username?.message}
                 />
-                <Input
+                <InputPassword
                     {...register('Password')}
-                    type="password"
                     id="password"
                     label="Password"
                     autoComplete="current-password"
@@ -48,7 +47,12 @@ const LoginForm = ({ className, switchFormType }: RegisterOrLoginFormProps) => {
             <Separator />
             <div>
                 <p> </p>
-                <Button onClick={switchFormType} type="button" variant="ghost">
+                <Button
+                    onClick={switchFormType}
+                    className="hover:text-blue-800 transition-colors"
+                    type="button"
+                    variant="ghost"
+                >
                     No account yet? Register now.{' '}
                 </Button>
             </div>
