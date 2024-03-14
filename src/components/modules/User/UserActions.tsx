@@ -19,22 +19,25 @@ import { useAppSelector } from '@/store/hooks'
 import { WithClassName } from '@/types/UI'
 
 const UserActions = ({ className }: WithClassName) => {
-    const isUserLoggedIn = useAppSelector((state) => state.user.data !== null)
-    const userData = useAppSelector((state) => state.user.data)
+    const isUserLoggedIn = useAppSelector(
+        (state) => state.user.currentUser !== null
+    )
+    const userData = useAppSelector((state) => state.user.currentUser)
 
     const initials = extractNameInitials(
         userData?.FirstName,
         userData?.LastName
     )
 
+    const userProfileImage = userData?.ProfileImage
+        ? userData.ProfileImage
+        : undefined
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Avatar className="shadow-md">
-                    <AvatarImage
-                        src={userData?.ProfileImage}
-                        alt="Profile Image"
-                    />
+                    <AvatarImage src={userProfileImage} alt="Profile Image" />
                     <AvatarFallback>
                         <span className="text-lg uppercase">{initials}</span>
                     </AvatarFallback>
