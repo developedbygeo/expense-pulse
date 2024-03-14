@@ -1,5 +1,15 @@
-import { app, BrowserWindow } from 'electron'
 import path from 'node:path'
+
+import { app, BrowserWindow, screen } from 'electron'
+// import { CORE_API_ACTIONS } from 'electron/enums/core'
+import installExtension, {
+    REACT_DEVELOPER_TOOLS,
+    REDUX_DEVTOOLS,
+} from 'electron-devtools-installer'
+import portfinder from 'portfinder'
+
+import { startServer } from '../api/databaseLayer'
+import { CORE_API_ACTIONS } from './enums/core'
 
 // The built directory structure
 //
@@ -19,13 +29,30 @@ let win: BrowserWindow | null
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL']
 
-function createWindow() {
+async function createWindow() {
+    // const { width, height } = screen.getPrimaryDisplay().workAreaSize
+
     win = new BrowserWindow({
         icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
         },
+
+        // screen width and height for the window
+        // width,
+        // height,
     })
+
+    win.webContents.openDevTools()
+
+    const freePort = await portfinder
+        .getPortPromise({
+            port: 3000,
+            stopPort: 8000,
+        })
+        .then((port) => port)
+
+    await startServer(freePort)
 
     // Test active push message to Renderer-process.
     win.webContents.on('did-finish-load', () => {
@@ -33,6 +60,8 @@ function createWindow() {
             'main-process-message',
             new Date().toLocaleString()
         )
+
+        win?.webContents.send(CORE_API_ACTIONS.SERVER_PORT, freePort)
     })
 
     if (VITE_DEV_SERVER_URL) {
@@ -53,12 +82,20 @@ app.on('window-all-closed', () => {
     }
 })
 
-app.on('activate', () => {
+app.on('activate', async () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow()
+        await createWindow()
     }
 })
 
-app.whenReady().then(createWindow)
+app.whenReady().then(async () => {
+    // installExtension(REDUX_DEVTOOLS)
+    //     .then((name) => console.log(`Added Extension:  ${name}`))
+    //     .catch((err) => console.log('An error occurred: ', err))
+    // installExtension(REACT_DEVELOPER_TOOLS)
+    //     .then((name) => console.log(`Added Extension:  ${name}`))
+    //     .catch((err) => console.log('An error occurred: ', err))
+    await createWindow()
+})
