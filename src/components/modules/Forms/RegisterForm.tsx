@@ -6,6 +6,7 @@ import Input from '@/components/elements/Input'
 import InputPassword from '@/components/elements/InputPassword'
 import { Separator } from '@/components/elements/Separator'
 import { cn } from '@/lib/utils'
+import { useRegisterUserMutation } from '@/store/api/user'
 import { RegisterOrLoginFormProps } from '@/types/forms/props'
 import { RegisterUser, RegisterUserSchema } from '@/types/forms/userAuthSchema'
 
@@ -22,8 +23,11 @@ const RegisterForm = ({
         resolver: zodResolver(RegisterUserSchema),
     })
 
+    const [registerUser, { data, isLoading, isError }] =
+        useRegisterUserMutation()
+
     const handleRegisterSubmission: SubmitHandler<RegisterUser> = (data) => {
-        console.log('SUCCESS', data)
+        registerUser(data)
     }
 
     return (
