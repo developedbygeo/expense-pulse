@@ -21,7 +21,8 @@ const DonutChart = ({ className, series, labels }: DonutChartProps) => {
                 }}
                 series={series}
                 type="donut"
-                width="100%"
+                width={400}
+                height={200}
             />
         </div>
     )
