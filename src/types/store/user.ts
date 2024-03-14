@@ -4,7 +4,7 @@ export type User = {
     Password: string
     FirstName: string
     LastName: string
-    DateOfBirth: number // unix timestamp
     Allowance: number
-    ProfileImage?: string
+    AnnualIncome?: number | null
+    ProfileImage?: string | null
 }

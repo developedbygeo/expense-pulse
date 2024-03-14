@@ -4,7 +4,8 @@ import { InitialUserSliceState } from '@/types/store'
 import { User } from '@/types/store/user'
 
 const initialState: InitialUserSliceState = {
-    data: null,
+    currentUser: null,
+    availableUsers: [],
 }
 
 export const userSlice = createSlice({
@@ -12,10 +13,10 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<User>) => {
-            state.data = action.payload
+            state.currentUser = action.payload
         },
         clearUser: (state) => {
-            state.data = null
+            state.currentUser = null
         },
     },
 })
