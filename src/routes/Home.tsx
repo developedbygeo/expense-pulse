@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { BentoGrid, BentoGridItem } from '@/components/elements/BentoGrid'
 import { Container } from '@/components/elements/Container'
 import FadeIn from '@/components/elements/FadeIn'
@@ -7,16 +5,6 @@ import { items } from '@/data/mockHomeItems'
 import { cn } from '@/lib/utils'
 
 const Home = () => {
-    const getData = async () => {
-        const response = await fetch('http://127.0.0.1:3000/api/createUser')
-        const data = await response.json()
-        console.log(data)
-    }
-
-    useEffect(() => {
-        getData()
-    }, [])
-
     return (
         <Container as="section">
             <h1 className="sr-only">Home</h1>
