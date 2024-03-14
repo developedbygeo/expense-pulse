@@ -1,4 +1,5 @@
 import getSymbolFromCurrency from 'currency-symbol-map'
+import { Fragment } from 'react'
 
 import { Separator } from '@/components/elements/Separator'
 import {
@@ -76,8 +77,9 @@ const LatestExpenses = ({ className, topN }: TopExpensesProps) => {
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
                 {latestExpenses.map((expense, index) => (
-                    <>
-                        <div key={index} className="flex justify-between">
+                    // TODO replace once actual data comes in
+                    <Fragment key={index}>
+                        <div className="flex justify-between">
                             <p>{expense.Vendor}</p>
                             <p>
                                 <span>
@@ -87,7 +89,7 @@ const LatestExpenses = ({ className, topN }: TopExpensesProps) => {
                             </p>
                         </div>
                         <Separator />
-                    </>
+                    </Fragment>
                 ))}
             </CardContent>
         </Card>
