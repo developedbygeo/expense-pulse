@@ -1,4 +1,4 @@
 export enum STATUS {
-    OK = 'Okay',
-    ERROR = 'Error',
+    OK = 1,
+    ERROR = 0,
 }
