@@ -1,3 +1,5 @@
+import { ComponentPropsWithoutRef } from 'react'
+
 export type WithClassName = {
     className?: string
 }
@@ -29,3 +31,6 @@ export type AnimationDirection = 'up' | 'down' | 'left' | 'right' | 'default'
 export type Prettify<T> = {
     [K in keyof T]: T[K]
 } & object
+
+export type InputProps = ComponentPropsWithoutRef<'input'> &
+    WithClassName & { label: string; errorMessage?: string }

@@ -1,11 +1,8 @@
-import { ComponentPropsWithoutRef, forwardRef, useId } from 'react'
+import { forwardRef, useId } from 'react'
 
 import InputError from '@/components/elements/InputError'
 import { cn } from '@/lib/utils'
-import { WithClassName } from '@/types/UI'
-
-type InputProps = ComponentPropsWithoutRef<'input'> &
-    WithClassName & { label: string; errorMessage?: string }
+import { InputProps } from '@/types/UI'
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
     ({ className, label, errorMessage, ...props }, ref) => {
