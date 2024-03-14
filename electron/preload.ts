@@ -1,7 +1,15 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
-// --------- Expose some API to the Renderer process ---------
-contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
+import { CORE_API_ACTIONS } from './enums/core'
+
+// --------- Expose API to the Renderer process ---------
+
+contextBridge.exposeInMainWorld('core', {
+    onReceivePort: (callback: (portString: string) => void) =>
+        ipcRenderer.on(CORE_API_ACTIONS.SERVER_PORT, (_, port) => {
+            callback(port)
+        }),
+})
 
 // `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.
 function withPrototype(obj: Record<string, any>) {
