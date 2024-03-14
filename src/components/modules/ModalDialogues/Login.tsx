@@ -10,10 +10,14 @@ import LoginForm from '@/components/modules/Forms/LoginForm'
 import RegisterForm from '@/components/modules/Forms/RegisterForm'
 import { WithClassName } from '@/types/UI'
 
-const Login = ({ className }: WithClassName) => {
+type LoginProps = WithClassName & {
+    shouldShowRegisterFirst?: boolean
+}
+
+const Login = ({ className, shouldShowRegisterFirst = false }: LoginProps) => {
     const [isRegisterForm, setIsRegisterForm] = useReducer(
         (prev) => !prev,
-        false
+        shouldShowRegisterFirst
     )
 
     const textToShow = isRegisterForm ? 'Register' : 'Log in'
