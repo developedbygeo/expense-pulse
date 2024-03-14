@@ -1,57 +1,113 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import { SubmitHandler, useForm } from 'react-hook-form'
+
 import { Button } from '@/components/elements/Button'
 import Input from '@/components/elements/Input'
+import InputPassword from '@/components/elements/InputPassword'
 import { Separator } from '@/components/elements/Separator'
 import { cn } from '@/lib/utils'
 import { RegisterOrLoginFormProps } from '@/types/forms/props'
+import { RegisterUser, RegisterUserSchema } from '@/types/forms/userAuthSchema'
 
 const RegisterForm = ({
     className,
     switchFormType,
 }: RegisterOrLoginFormProps) => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<RegisterUser>({
+        mode: 'onChange',
+        resolver: zodResolver(RegisterUserSchema),
+    })
+
+    const handleRegisterSubmission: SubmitHandler<RegisterUser> = (data) => {
+        console.log('SUCCESS', data)
+    }
+
     return (
-        <form className={cn('flex flex-col w-full gap-8', className)}>
+        <form
+            onSubmit={handleSubmit(handleRegisterSubmission)}
+            className={cn('flex flex-col w-full gap-8', className)}
+        >
             <fieldset className="grid gap-8 grid-cols-2 mt-12">
                 <Input
+                    {...register('Username')}
                     className="col-span-2"
                     type="text"
                     id="username"
                     label="Username"
+                    errorMessage={errors.Username?.message}
                 />
-                <Input
-                    type="password"
+                <InputPassword
+                    {...register('Password')}
                     id="password"
                     label="Password"
                     autoComplete="new-password"
+                    errorMessage={errors.Password?.message}
                 />
-                <Input
-                    type="password"
-                    id="confirmPassword"
+                <InputPassword
+                    {...register('ConfirmPassword')}
+                    id="ConfirmPassword"
                     label="Confirm Password"
                     autoComplete="new-password"
+                    errorMessage={errors.ConfirmPassword?.message}
                 />
             </fieldset>
             <Separator />
             <fieldset className="grid grid-cols-2 gap-8">
-                <Input type="text" id="FirstName" label="First Name" />
-                <Input type="text" id="LastName" label="Last Name" />
+                <Input
+                    {...register('FirstName')}
+                    type="text"
+                    id="FirstName"
+                    label="First Name"
+                    errorMessage={errors.FirstName?.message}
+                />
+                <Input
+                    {...register('LastName')}
+                    type="text"
+                    id="LastName"
+                    label="Last Name"
+                    errorMessage={errors.LastName?.message}
+                />
             </fieldset>
             <Separator />
 
             <fieldset className="grid grid-cols-2 gap-8">
-                <Input type="date" id="dob" label="Date of Birth" />
-                <Input type="number" id="allowance" label="Allowance (USD)" />
+                <Input
+                    {...register('AnnualIncome', { valueAsNumber: true })}
+                    type="number"
+                    id="AnnualIncome"
+                    label="Annual Income (optional)"
+                    errorMessage={errors.AnnualIncome?.message}
+                />
+                <Input
+                    {...register('Allowance', { valueAsNumber: true })}
+                    type="number"
+                    id="Allowance"
+                    label="Allowance (USD)"
+                    errorMessage={errors.Allowance?.message}
+                />
             </fieldset>
             <Separator />
             <fieldset className="flex flex-col space-y-8">
                 <Input
+                    {...register('ProfileImage')}
                     type="url"
-                    id="profileImage"
+                    id="ProfileImage"
                     label="Profile Image (URL)"
+                    errorMessage={errors.ProfileImage?.message}
                 />
             </fieldset>
             <Separator />
             <div>
-                <Button onClick={switchFormType} type="button" variant="ghost">
+                <Button
+                    onClick={switchFormType}
+                    className="hover:text-blue-800 transition-colors"
+                    type="button"
+                    variant="ghost"
+                >
                     Already have an account? Log in
                 </Button>
             </div>
