@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { get } from 'http'
 
 import { userApi } from '@/store/api/user'
 import { appSettingsSlice } from '@/store/slices/appSettings'
