@@ -1,12 +1,11 @@
 import { z, ZodType } from 'zod'
 
-import { User } from '@/types/store/user'
-import { Prettify } from '@/types/UI'
-
 import {
     LOGIN_FIELD_NAMES,
     REGISTER_FIELD_NAMES,
-} from '../../types/data/enums/auth'
+} from '@/types/data/enums/auth'
+import { User } from '@/types/store/user'
+import { Prettify } from '@/types/UI'
 
 export type RegisterUser = Prettify<
     Omit<User, 'UserId'> & {
