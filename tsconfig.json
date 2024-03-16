@@ -1,32 +1,37 @@
 {
-    "compilerOptions": {
-        "target": "ES2020",
-        "useDefineForClassFields": true,
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
-        "module": "ESNext",
-        "skipLibCheck": true,
-        "allowSyntheticDefaultImports": true,
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": [],
 
-        /* Bundler mode */
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx",
+    // imports
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/frontend/components/*"],
+      "@/store/*": ["./src/frontend/store/*"],
+      "@/types/*": ["./src/frontend/types/*"],
+      "@/routes/*": ["./src/frontend/routes/*"],
+      "@/data/*": ["./src/frontend/data/*"],
+      "@/styles/*": ["./src/frontend/styles/*"],
+      "@/elements/*": ["./src/frontend/components/elements/*"],
+      "@/modules/*": ["./src/frontend/components/modules/*"],
+      "@/lib/*": ["./src/frontend/lib/*"],
 
-        /* Linting */
-        "strict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noFallthroughCasesInSwitch": true,
-        "baseUrl": ".",
-        "paths": {
-            "@/*": ["./src/*"],
-            "@/elements/*": ["./src/components/elements/*"],
-            "@/modules/*": ["./src/components/modules/*"]
-        }
-    },
-    "include": ["src", "electron"],
-    "references": [{ "path": "./tsconfig.node.json" }]
+      // api and db
+      "@/api/*": ["./src/api/*"],
+      "@/db/*": ["./src/db/*"]
+    }
+  },
+  "include": ["src/**/*"]
 }
