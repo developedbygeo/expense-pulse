@@ -5,7 +5,7 @@ import {
     FetchBaseQueryError,
 } from '@reduxjs/toolkit/query'
 
-import { RootState } from '@/store'
+import { RootState } from '@/store/index'
 
 const generateBaseQuery = (port: number) =>
     fetchBaseQuery({ baseUrl: `http://localhost:${port}/api` })
