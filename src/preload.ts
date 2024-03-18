@@ -6,8 +6,7 @@ import { CORE_API_ACTIONS } from '@/api/enums/coreApi'
 
 contextBridge.exposeInMainWorld('core', {
     onReceivePort: (callback: (portString: string) => void) =>
-        ipcRenderer.on(CORE_API_ACTIONS.SERVER_PORT, (_, port) => {
-            console.log('RECEIVED PORT')
+        ipcRenderer.on('serverPort', (_, port) => {
             callback(port)
         }),
 })
