@@ -12,6 +12,8 @@ if (require('electron-squirrel-startup')) {
     app.quit()
 }
 
+let port: number
+
 const createWindow = async () => {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
@@ -19,6 +21,7 @@ const createWindow = async () => {
         height: 600,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
+            nodeIntegration: true,
         },
     })
 
@@ -37,19 +40,21 @@ const createWindow = async () => {
     }
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
 
-    const freePort = await portfinder
-        .getPortPromise({
-            port: 3000,
-            stopPort: 8000,
-        })
-        .then((port) => port)
+    mainWindow.webContents.on('did-finish-load', async () => {
+        mainWindow.webContents.openDevTools()
+        const freePort = await portfinder
+            .getPortPromise({
+                port: 3000,
+                stopPort: 8000,
+            })
+            .then((port) => port)
 
-    await startServer(freePort)
+        await startServer(freePort)
 
-    mainWindow?.webContents.send(CORE_API_ACTIONS.SERVER_PORT, freePort)
-    console.log('SENT EVENT')
+        port = freePort
+        mainWindow.webContents.send('serverPort', freePort)
+    })
 }
 
 // This method will be called when Electron has finished
