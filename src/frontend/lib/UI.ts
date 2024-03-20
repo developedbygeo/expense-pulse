@@ -13,3 +13,6 @@ export const colorCodeRatio = (value: number, threshold: number) => {
     if (percentage < 75) return 'text-amber-600'
     return 'text-red-700'
 }
+
+export const generateCtaAsyncText = (text: string, isLoading: boolean) =>
+    isLoading ? 'Loading...' : text
