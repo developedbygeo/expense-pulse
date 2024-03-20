@@ -31,8 +31,10 @@ export const openDatabaseConnection = async () => {
 // The `db` instance is opened immediately for use throughout your application
 
 // Function to close the database connection
-export const closeDatabaseConnection = async (db: Database) => {
-    await db.close()
+export const closeDatabaseConnection = async () => {
+    if (currentDb) {
+        await currentDb.close()
+    }
 }
 
 export const getDatabase = async () => {
