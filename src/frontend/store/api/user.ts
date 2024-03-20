@@ -4,13 +4,14 @@ import { ROOT_ENDPOINTS, USER_ENDPOINTS } from '@/api/enums/endpoints'
 import dynamicBaseQuery from '@/store/api/lib/dynamicBaseQuery'
 import { LoginUser, RegisterUser } from '@/types/forms/userAuthSchema'
 import { GetAllUsersData } from '@/frontend/types/apiResponses/users'
+import { InsertUserReturnType } from '@/db/types/user'
 
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: dynamicBaseQuery,
     tagTypes: ['User'],
     endpoints: (builder) => ({
-        registerUser: builder.mutation<any, RegisterUser>({
+        registerUser: builder.mutation<InsertUserReturnType, RegisterUser>({
             query: (user) => ({
                 url: `${ROOT_ENDPOINTS.USERS}/${USER_ENDPOINTS.REGISTER}`,
                 method: 'POST',
