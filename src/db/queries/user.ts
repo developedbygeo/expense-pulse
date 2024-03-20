@@ -2,8 +2,11 @@ import { RegisterUser } from '@/types/forms/userAuthSchema'
 
 import { getDatabase } from '@/db/index'
 import { User } from '@/frontend/types/store/user'
+import { InsertUserReturnType } from '@/db/types/user'
 
-export const insertUser = async (user: RegisterUser) => {
+export const insertUser = async (
+    user: RegisterUser
+): Promise<InsertUserReturnType> => {
     const databaseManager = await getDatabase()
 
     const {
@@ -39,8 +42,14 @@ export const insertUser = async (user: RegisterUser) => {
         console.log(
             `Inserted: ${result.changes} rows into Users table with the last ID ${result.lastID} into user`
         )
-    } catch (err) {
-        console.error('Error inserting user into database:', err)
+        return {
+            insertedUserId: result.lastID,
+            changes: result.changes,
+            error: null,
+        }
+    } catch (error) {
+        console.error('Error inserting user into database:', error)
+        return { insertedUserId: null, changes: null, error }
     }
 }
 
