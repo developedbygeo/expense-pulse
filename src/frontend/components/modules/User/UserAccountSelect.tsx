@@ -44,7 +44,7 @@ const UserAccountSelect = ({ className }: WithClassName) => {
                 <li key={`${user.FirstName}-${user.LastName}-${user.UserId}`}>
                     <Button
                         onClick={() => handleUserLogin(user)}
-                        className="flex gap-4 w-full h-16 justify-start"
+                        className="flex hover:bg-neutral-200 gap-4 w-full h-16 justify-start"
                         variant="ghost"
                     >
                         <Avatar>
