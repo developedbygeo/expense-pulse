@@ -9,6 +9,12 @@ import { cn } from '@/lib/utils'
 import { useRegisterUserMutation } from '@/store/api/user'
 import { RegisterOrLoginFormProps } from '@/types/forms/props'
 import { RegisterUser, RegisterUserSchema } from '@/types/forms/userAuthSchema'
+import Spinner from '@/frontend/components/elements/Spinner'
+import { generateCtaAsyncText } from '@/frontend/lib/async'
+import { useEffect } from 'react'
+import { MESSAGES } from '@/frontend/types/data/enums/messages'
+import { useAppDispatch } from '@/frontend/store/hooks'
+import { setUser } from '@/frontend/store/slices/userSlice'
 
 const RegisterForm = ({
     className,
@@ -17,18 +23,42 @@ const RegisterForm = ({
     const {
         register,
         handleSubmit,
+        getValues,
         formState: { errors },
     } = useForm<RegisterUser>({
         mode: 'onChange',
         resolver: zodResolver(RegisterUserSchema),
     })
 
-        const [registerUser, { data, isLoading, isError }] =
-        useRegisterUserMutation()
+    const dispatch = useAppDispatch()
+
+    const [
+        registerUser,
+        {
+            data: registrationData,
+            isLoading,
+            isSuccess: registrationSuccess,
+            isError: registrationError,
+        },
+    ] = useRegisterUserMutation()
 
     const handleRegisterSubmission: SubmitHandler<RegisterUser> = (data) => {
         registerUser(data)
     }
+
+    // side effect to trigger user state update
+    useEffect(() => {
+        if (registrationSuccess) {
+            const registrationValues = getValues()
+            console.log(registrationData)
+
+            const newUser = {
+                ...registrationValues,
+                UserId: registrationData.insertedUserId,
+            }
+            dispatch(setUser(newUser))
+        }
+    }, [registrationSuccess])
 
     return (
         <form
@@ -116,11 +146,30 @@ const RegisterForm = ({
                 </Button>
             </div>
             <Separator />
+
+            {registrationSuccess && (
+                <p className="text-success font-medium">
+                    {MESSAGES.REGISTER_SUCCESS}
+                </p>
+            )}
+
             <div className="flex my-8 gap-6">
-                <Button type="submit" variant="default" size="default">
-                    Register
+                <Button
+                    className="flex gap-2"
+                    disabled={isLoading || registrationSuccess}
+                    type="submit"
+                    variant="default"
+                    size="default"
+                >
+                    {isLoading && <Spinner />}
+                    {generateCtaAsyncText('Register', isLoading)}
                 </Button>
-                <Button type="button" variant="outline" size="default">
+                <Button
+                    disabled={isLoading || registrationSuccess}
+                    type="button"
+                    variant="outline"
+                    size="default"
+                >
                     Cancel
                 </Button>
             </div>
