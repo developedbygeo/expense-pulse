@@ -4,8 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    body[data-scroll-locked] {
+        @apply !p-8;
+    }
+}
+
 @layer utilities {
-  .sidebar-open main {
-    @apply translate-x-32;
-  }
+    .sidebar-open main {
+        @apply translate-x-32;
+    }
 }
