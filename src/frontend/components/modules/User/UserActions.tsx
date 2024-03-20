@@ -18,10 +18,22 @@ import { extractNameInitials } from '@/lib/data'
 import { useAppSelector } from '@/store/hooks'
 import { WithClassName } from '@/types/UI'
 
-const UserActions = ({ className }: WithClassName) => {
+type UserActionProps = WithClassName & {
+    dropdownContainerRef: React.RefObject<HTMLDivElement>
+}
+
+const UserActions = ({ className, dropdownContainerRef }: UserActionProps) => {
     const isUserLoggedIn = useAppSelector(
         (state) => state.user.currentUser !== null
     )
+    const areMultipleUsersAvailable = useAppSelector(
+        (state) => state.user.availableUsers.length > 1
+    )
+
+    const shouldShowChangeUser = isUserLoggedIn && areMultipleUsersAvailable
+
+    console.log('shouldShowChangeUser', shouldShowChangeUser)
+
     const userData = useAppSelector((state) => state.user.currentUser)
 
     const initials = extractNameInitials(
@@ -36,14 +48,14 @@ const UserActions = ({ className }: WithClassName) => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Avatar className="shadow-md">
+                <Avatar className="shadow-md !relative">
                     <AvatarImage src={userProfileImage} alt="Profile Image" />
                     <AvatarFallback>
                         <span className="text-lg uppercase">{initials}</span>
                     </AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent container={dropdownContainerRef.current}>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
@@ -57,12 +69,12 @@ const UserActions = ({ className }: WithClassName) => {
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
+                    {shouldShowChangeUser ? (
+                        <DropdownMenuItem>Change User</DropdownMenuItem>
+                    ) : null}
                     <DropdownMenuItem asChild>
                         <UserAuthActions isLoggedIn={isUserLoggedIn} />
                     </DropdownMenuItem>
-                    {isUserLoggedIn ? (
-                        <DropdownMenuItem>Change User</DropdownMenuItem>
-                    ) : null}
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
