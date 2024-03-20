@@ -15,6 +15,7 @@ import { Separator } from '@/components/elements/Separator'
 import Login from '@/components/modules/ModalDialogues/Login'
 import UserAccountSelect from '@/components/modules/User/UserAccountSelect'
 import { useAppSelector } from '@/store/hooks'
+import { Button } from '@/frontend/components/elements/Button'
 
 const CurrentUserLogin = () => {
     const currentUser = useAppSelector((state) => state.user.currentUser)
@@ -69,11 +70,17 @@ const CurrentUserLogin = () => {
                     </div>
                     <Separator className="!mb-4" />
                 </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={handleFirstTimeUser}>
-                        {ctaText}
-                    </AlertDialogAction>
+                <AlertDialogFooter className="!flex-col gap-6">
+                    <div className="flex items-center gap-3">
+                        <p>Would you like to create a new account? </p>
+                        <Button
+                            onClick={handleFirstTimeUser}
+                            className="!px-0 text-blue-600 hover:bg-transparent hover:text-blue-800 font-semibold"
+                            variant="ghost"
+                        >
+                            Click here
+                        </Button>
+                    </div>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>
