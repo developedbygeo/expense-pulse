@@ -5,9 +5,9 @@ import {
     MdPayments,
     MdPerson,
     MdSettings,
-} from 'react-icons/md'
+} from 'react-icons/md';
 
-enum NavigationEnum {
+export enum NAVIGATION_LINKS {
     HOME = '/',
     /* expense domain */
     MY_EXPENSES = '/my-expenses',
@@ -28,39 +28,39 @@ enum NavigationEnum {
     PROFILE = '/profile',
 }
 
-export const NAVIGATION_LINKS = {
+export const SIDEBAR_NAVIGATION = {
     core: [
         {
             label: 'Home',
             icon: MdHome,
-            href: NavigationEnum.HOME,
+            href: NAVIGATION_LINKS.HOME,
         },
         {
             label: 'My Expenses',
             icon: MdPayments,
-            href: NavigationEnum.MY_EXPENSES,
+            href: NAVIGATION_LINKS.MY_EXPENSES,
         },
         {
             label: 'Analysis',
             icon: MdAnalytics,
-            href: NavigationEnum.ANALYSIS,
+            href: NAVIGATION_LINKS.ANALYSIS,
         },
         {
             label: 'Reports',
             icon: MdAssignment,
-            href: NavigationEnum.REPORTS,
+            href: NAVIGATION_LINKS.REPORTS,
         },
     ],
     misc: [
         {
             label: 'Settings',
             icon: MdSettings,
-            href: NavigationEnum.SETTINGS,
+            href: NAVIGATION_LINKS.SETTINGS,
         },
         {
             label: 'Profile',
             icon: MdPerson,
-            href: NavigationEnum.PROFILE,
+            href: NAVIGATION_LINKS.PROFILE,
         },
     ],
-}
+};
