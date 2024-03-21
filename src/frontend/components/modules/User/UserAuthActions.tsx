@@ -21,7 +21,7 @@ const UserAuthActions = forwardRef<HTMLButtonElement, UserAuthProps>(
         return (
             <Dialog>
                 <DialogTrigger
-                    className="px-2 w-full text-left py-1.5 text-sm outline-none transition-colors focus:bg-neutral-100 focus:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
+                    className="px-2 w-full text-left py-1.5 text-sm outline-none transition-colors focus:bg-neutral-100 focus:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-neutral-200"
                     ref={ref}
                 >
                     {isLoggedIn ? 'Log Out' : 'Log In'}
