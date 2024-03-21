@@ -13,7 +13,14 @@ import { cn } from '@/lib/utils'
 import { useAppDispatch } from '@/store/hooks'
 import { WithClassName } from '@/types/UI'
 
-const UserAccountSelect = ({ className }: WithClassName) => {
+type UserAccountSelectProps = WithClassName & {
+    handleModalExternally?: () => void
+}
+
+const UserAccountSelect = ({
+    className,
+    handleModalExternally,
+}: UserAccountSelectProps) => {
     const dispatch = useAppDispatch()
 
     const { data: users, error, isLoading } = useGetUsersQuery()
@@ -36,6 +43,9 @@ const UserAccountSelect = ({ className }: WithClassName) => {
 
     const handleUserLogin = (user: User) => {
         dispatch(setUser(user))
+        if (handleModalExternally) {
+            handleModalExternally()
+        }
     }
 
     return (
