@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion'
-import { Fragment, useEffect, useReducer } from 'react'
-import { NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { Fragment, useEffect, useReducer } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import { Separator } from '@/components/elements/Separator'
-import AnimatedBurgerButton from '@/components/modules/UI/AnimatedBurgerButton'
-import { NAVIGATION_LINKS } from '@/data/links'
-import { handleLayoutWithSidebar } from '@/lib/UI'
-import { cn } from '@/lib/utils'
-import { WithClassName } from '@/types/UI'
+import { Separator } from '@/components/elements/Separator';
+import AnimatedBurgerButton from '@/components/modules/UI/AnimatedBurgerButton';
+import { SIDEBAR_NAVIGATION } from '@/data/links';
+import { handleLayoutWithSidebar } from '@/lib/UI';
+import { cn } from '@/lib/utils';
+import { WithClassName } from '@/types/UI';
 
 const Sidebar = ({ className }: WithClassName) => {
-    const [expanded, setExpanded] = useReducer((prev) => !prev, false)
+    const [expanded, setExpanded] = useReducer((prev) => !prev, false);
 
     useEffect(() => {
-        handleLayoutWithSidebar(expanded)
-    }, [expanded])
+        handleLayoutWithSidebar(expanded);
+    }, [expanded]);
 
     return (
         <div
@@ -32,8 +32,8 @@ const Sidebar = ({ className }: WithClassName) => {
                             handleOpen={setExpanded}
                         />
                         <div className="h-[83.5vh] mt-6 flex flex-col relative">
-                            {NAVIGATION_LINKS.core.map((link) => {
-                                const NavIcon = link.icon
+                            {SIDEBAR_NAVIGATION.core.map((link) => {
+                                const NavIcon = link.icon;
                                 return (
                                     <Fragment key={link.href}>
                                         <NavLink
@@ -75,12 +75,12 @@ const Sidebar = ({ className }: WithClassName) => {
                                         </NavLink>
                                         <Separator />
                                     </Fragment>
-                                )
+                                );
                             })}
                         </div>
                         <div className="">
-                            {NAVIGATION_LINKS.misc.map((link) => {
-                                const NavIcon = link.icon
+                            {SIDEBAR_NAVIGATION.misc.map((link) => {
+                                const NavIcon = link.icon;
                                 return (
                                     <Fragment key={link.href}>
                                         <NavLink
@@ -122,14 +122,14 @@ const Sidebar = ({ className }: WithClassName) => {
                                         </NavLink>
                                         <Separator />
                                     </Fragment>
-                                )
+                                );
                             })}
                         </div>
                     </ul>
                 </nav>
             </aside>
         </div>
-    )
-}
+    );
+};
 
-export default Sidebar
+export default Sidebar;
