@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback } from '@/components/elements/Avatar'
-import UserActions from '@/components/modules/User/UserActions'
+import UserProfileActions from '@/frontend/components/modules/User/UserProfileActions'
 import { cn } from '@/lib/utils'
 import { WithClassName } from '@/types/UI'
 import { useRef } from 'react'
@@ -16,7 +16,7 @@ const Header = ({ className }: WithClassName) => {
             )}
         >
             <div className="flex justify-end container">
-                <UserActions dropdownContainerRef={headerRef} />
+                <UserProfileActions dropdownContainerRef={headerRef} />
             </div>
         </header>
     )
