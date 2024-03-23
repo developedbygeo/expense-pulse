@@ -1,36 +1,41 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef } from 'react';
 
 export type WithClassName = {
-    className?: string
-}
+    className?: string;
+};
 
 export type WithChildren = {
-    children?: React.ReactNode
-}
+    children?: React.ReactNode;
+};
 
 export type WithSource = {
-    src: string
-}
+    src: string;
+};
 
 export type WithDataIsDark = {
-    'data-is-dark'?: string
-}
+    'data-is-dark'?: string;
+};
 
 export type WithSearchParams = {
-    searchParams?: string | string[] | undefined
-}
+    searchParams?: string | string[] | undefined;
+};
 
 export type WithCategorySearchParams = {
     searchParams?: {
-        category: string
-    }
-}
+        category: string;
+    };
+};
 
-export type AnimationDirection = 'up' | 'down' | 'left' | 'right' | 'default'
+export type AnimationDirection = 'up' | 'down' | 'left' | 'right' | 'default';
 
 export type Prettify<T> = {
-    [K in keyof T]: T[K]
-} & object
+    [K in keyof T]: T[K];
+} & object;
 
 export type InputProps = ComponentPropsWithoutRef<'input'> &
-    WithClassName & { label: string; errorMessage?: string }
+    WithClassName & { label: string; errorMessage?: string };
+
+export type SelectItemType = {
+    value: string;
+    label: string;
+};
