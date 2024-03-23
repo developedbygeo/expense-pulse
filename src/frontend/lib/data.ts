@@ -24,3 +24,11 @@ export const getLatestExpenses = (expenses: Expense[], topN: number) => {
     // reverse to return latest first.
     return sortedExpenses.slice(0, topN).reverse()
 }
+
+export const calculateAllowanceToExpensesRatio = (
+    allowance: number,
+    expenses: number
+) => Math.round((allowance / expenses) * 100)
+
+export const primitiveValueExists = (value: unknown): boolean =>
+    value !== null && value !== undefined
